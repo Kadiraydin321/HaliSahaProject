@@ -1,0 +1,527 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HaliSahaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Astroturfs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="150" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="15" />
+          <Property Name="Info" Type="nvarchar(max)" />
+          <Property Name="County_ID" Type="int" />
+          <Property Name="Manager_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Counties">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="City_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Rezervations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="Astroturf_ID" Type="int" />
+          <Property Name="User_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Mail" Type="varchar" MaxLength="150" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="150" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="15" />
+          <Property Name="RegisterDate" Type="datetime" Nullable="false" />
+          <Property Name="Point" Type="int" Nullable="false" />
+          <Property Name="Role_ID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Astroturfs_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Astroturfs" Type="Self.Astroturfs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Astroturfs">
+              <PropertyRef Name="Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Astroturfs_dbo_Counties_County_ID">
+          <End Role="Counties" Type="Self.Counties" Multiplicity="0..1" />
+          <End Role="Astroturfs" Type="Self.Astroturfs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Counties">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Astroturfs">
+              <PropertyRef Name="County_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Counties_dbo_Cities_City_ID">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="Counties" Type="Self.Counties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Counties">
+              <PropertyRef Name="City_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Roles_Role_ID">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervations_Astroturfs">
+          <End Role="Astroturfs" Type="Self.Astroturfs" Multiplicity="0..1" />
+          <End Role="Rezervations" Type="Self.Rezervations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Astroturfs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervations">
+              <PropertyRef Name="Astroturf_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervations_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Rezervations" Type="Self.Rezervations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervations">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLogin_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserLogin">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HaliSahaDBModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Astroturfs" EntityType="Self.Astroturfs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Counties" EntityType="Self.Counties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezervations" EntityType="Self.Rezervations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Astroturfs_Users" Association="Self.FK_Astroturfs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Astroturfs" EntitySet="Astroturfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Astroturfs_dbo_Counties_County_ID" Association="Self.FK_dbo_Astroturfs_dbo_Counties_County_ID">
+            <End Role="Counties" EntitySet="Counties" />
+            <End Role="Astroturfs" EntitySet="Astroturfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Counties_dbo_Cities_City_ID" Association="Self.FK_dbo_Counties_dbo_Cities_City_ID">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Counties" EntitySet="Counties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Roles_Role_ID" Association="Self.FK_dbo_Users_dbo_Roles_Role_ID">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervations_Astroturfs" Association="Self.FK_Rezervations_Astroturfs">
+            <End Role="Astroturfs" EntitySet="Astroturfs" />
+            <End Role="Rezervations" EntitySet="Rezervations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervations_Users" Association="Self.FK_Rezervations_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rezervations" EntitySet="Rezervations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLogin_Users" Association="Self.FK_UserLogin_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogin" EntitySet="UserLogin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HaliSahaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Astroturfs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="County_ID" Type="Int32" />
+          <Property Name="Manager_ID" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Astroturfs_Users" FromRole="Astroturfs" ToRole="Users" />
+          <NavigationProperty Name="Counties" Relationship="Self.FK_dbo_Astroturfs_dbo_Counties_County_ID" FromRole="Astroturfs" ToRole="Counties" />
+          <NavigationProperty Name="Rezervations" Relationship="Self.FK_Rezervations_Astroturfs" FromRole="Astroturfs" ToRole="Rezervations" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Counties" Relationship="Self.FK_dbo_Counties_dbo_Cities_City_ID" FromRole="Cities" ToRole="Counties" />
+        </EntityType>
+        <EntityType Name="Counties">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City_ID" Type="Int32" />
+          <NavigationProperty Name="Astroturfs" Relationship="Self.FK_dbo_Astroturfs_dbo_Counties_County_ID" FromRole="Counties" ToRole="Astroturfs" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_dbo_Counties_dbo_Cities_City_ID" FromRole="Counties" ToRole="Cities" />
+        </EntityType>
+        <EntityType Name="Rezervations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+          <Property Name="Astroturf_ID" Type="Int32" />
+          <Property Name="User_ID" Type="Int32" />
+          <NavigationProperty Name="Astroturfs" Relationship="Self.FK_Rezervations_Astroturfs" FromRole="Rezervations" ToRole="Astroturfs" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Rezervations_Users" FromRole="Rezervations" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_Roles_Role_ID" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserLogin">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Mail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_UserLogin_Users" FromRole="UserLogin" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Point" Type="Int32" Nullable="false" />
+          <Property Name="Role_ID" Type="Int32" />
+          <NavigationProperty Name="Astroturfs" Relationship="Self.FK_Astroturfs_Users" FromRole="Users" ToRole="Astroturfs" />
+          <NavigationProperty Name="Rezervations" Relationship="Self.FK_Rezervations_Users" FromRole="Users" ToRole="Rezervations" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_dbo_Users_dbo_Roles_Role_ID" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="UserLogin" Relationship="Self.FK_UserLogin_Users" FromRole="Users" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK_Astroturfs_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Astroturfs" Type="Self.Astroturfs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Astroturfs">
+              <PropertyRef Name="Manager_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Astroturfs_dbo_Counties_County_ID">
+          <End Role="Counties" Type="Self.Counties" Multiplicity="0..1" />
+          <End Role="Astroturfs" Type="Self.Astroturfs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Counties">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Astroturfs">
+              <PropertyRef Name="County_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervations_Astroturfs">
+          <End Role="Astroturfs" Type="Self.Astroturfs" Multiplicity="0..1" />
+          <End Role="Rezervations" Type="Self.Rezervations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Astroturfs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervations">
+              <PropertyRef Name="Astroturf_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Counties_dbo_Cities_City_ID">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="Counties" Type="Self.Counties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Counties">
+              <PropertyRef Name="City_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervations_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Rezervations" Type="Self.Rezervations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rezervations">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Users_dbo_Roles_Role_ID">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLogin_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserLogin">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HaliSahaDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Astroturfs" EntityType="Self.Astroturfs" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" />
+          <EntitySet Name="Counties" EntityType="Self.Counties" />
+          <EntitySet Name="Rezervations" EntityType="Self.Rezervations" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="UserLogin" EntityType="Self.UserLogin" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_Astroturfs_Users" Association="Self.FK_Astroturfs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Astroturfs" EntitySet="Astroturfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Astroturfs_dbo_Counties_County_ID" Association="Self.FK_dbo_Astroturfs_dbo_Counties_County_ID">
+            <End Role="Counties" EntitySet="Counties" />
+            <End Role="Astroturfs" EntitySet="Astroturfs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervations_Astroturfs" Association="Self.FK_Rezervations_Astroturfs">
+            <End Role="Astroturfs" EntitySet="Astroturfs" />
+            <End Role="Rezervations" EntitySet="Rezervations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Counties_dbo_Cities_City_ID" Association="Self.FK_dbo_Counties_dbo_Cities_City_ID">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Counties" EntitySet="Counties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervations_Users" Association="Self.FK_Rezervations_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Rezervations" EntitySet="Rezervations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Users_dbo_Roles_Role_ID" Association="Self.FK_dbo_Users_dbo_Roles_Role_ID">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLogin_Users" Association="Self.FK_UserLogin_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLogin" EntitySet="UserLogin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HaliSahaDBModelStoreContainer" CdmEntityContainer="HaliSahaDBEntities1">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="HaliSahaDBModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Astroturfs">
+            <EntityTypeMapping TypeName="HaliSahaDBModel.Astroturfs">
+              <MappingFragment StoreEntitySet="Astroturfs">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="County_ID" ColumnName="County_ID" />
+                <ScalarProperty Name="Manager_ID" ColumnName="Manager_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="HaliSahaDBModel.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Counties">
+            <EntityTypeMapping TypeName="HaliSahaDBModel.Counties">
+              <MappingFragment StoreEntitySet="Counties">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City_ID" ColumnName="City_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervations">
+            <EntityTypeMapping TypeName="HaliSahaDBModel.Rezervations">
+              <MappingFragment StoreEntitySet="Rezervations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Astroturf_ID" ColumnName="Astroturf_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="HaliSahaDBModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogin">
+            <EntityTypeMapping TypeName="HaliSahaDBModel.UserLogin">
+              <MappingFragment StoreEntitySet="UserLogin">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HaliSahaDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

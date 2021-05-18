@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8270f4bc25d4bb4b8d892d4efd478b6" Name="Diagram1">
+        <EntityTypeShape EntityType="HaliSahaDBModel.Admin" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaliSahaDBModel.Astroturfs" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaliSahaDBModel.Cities" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaliSahaDBModel.Counties" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaliSahaDBModel.Rezervations" Width="1.5" PointX="7.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaliSahaDBModel.Roles" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaliSahaDBModel.UserLogin" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HaliSahaDBModel.Users" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="HaliSahaDBModel.FK_Astroturfs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="HaliSahaDBModel.FK_dbo_Astroturfs_dbo_Counties_County_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HaliSahaDBModel.FK_Rezervations_Astroturfs" ManuallyRouted="false" />
+        <AssociationConnector Association="HaliSahaDBModel.FK_dbo_Counties_dbo_Cities_City_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HaliSahaDBModel.FK_Rezervations_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="HaliSahaDBModel.FK_dbo_Users_dbo_Roles_Role_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HaliSahaDBModel.FK_UserLogin_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
