@@ -11,7 +11,8 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +23,13 @@ namespace HaliSahaProject.Models
         }
     
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string Mail { get; set; }
+        [Required]
         public string Tel { get; set; }
         public System.DateTime RegisterDate { get; set; }
         public int Point { get; set; }

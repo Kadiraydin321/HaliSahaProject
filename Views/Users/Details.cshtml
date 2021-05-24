@@ -1,0 +1,73 @@
+﻿@model HaliSahaProject.Models.Users
+
+@{
+    ViewBag.Title = "Profil";
+}
+
+<h2>Profil</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Soyad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            Mail
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+
+        <dt>
+            Telefon
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tel)
+        </dd>
+
+        <dt>
+            Kayıt Tarihi
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegisterDate)
+        </dd>
+
+        <dt>
+           Puan
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Point)
+        </dd>
+        @if (Model.Role_ID != 1)
+        {
+            <dt>
+                Rol
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Roles.Name)
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { }, new { @class = "btn btn-outline-success" })
+</p>

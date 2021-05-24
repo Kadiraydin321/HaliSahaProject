@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HaliSahaProject.Models.Users>
+
+@{
+    ViewBag.Title = "Kullanıcılar";
+}
+
+<h2>Kullanıcılar</h2>
+
+<p>
+    @Html.ActionLink("Yeni Kullanıcı Oluştur", "Create","", new { @class="btn btn-outline-success"})
+</p>
+<table class="table table-success table-hover">
+    <tr>
+        <th>
+            Adı
+        </th>
+        <th>
+            Soyadı
+        </th>
+        <th>
+            Mail
+        </th>
+        <th>
+            Telefon
+        </th>
+        <th>
+            Kayıt Tarihi
+        </th>
+        <th>
+            Puanı
+        </th>
+        <th>
+            Rolü
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Point)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Roles.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Rol Değiştir", "RoleEdit", new { id = item.ID }, new { @class = "text-warning" }) |
+            @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "text-danger" })
+        </td>
+    </tr>
+}
+
+</table>

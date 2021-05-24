@@ -13,9 +13,9 @@ namespace HaliSahaProject.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HaliSahaDB : DbContext
+    public partial class HaliSahaDBEntities1 : DbContext
     {
-        public HaliSahaDB()
+        public HaliSahaDBEntities1()
             : base("name=HaliSahaDBEntities1")
         {
         }

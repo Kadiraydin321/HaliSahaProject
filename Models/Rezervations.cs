@@ -11,13 +11,17 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Rezervations
     {
         public int ID { get; set; }
+        [Required]
         public System.DateTime Date { get; set; }
         public bool State { get; set; }
+        [Required]
         public Nullable<int> Astroturf_ID { get; set; }
+        [Required]
         public Nullable<int> User_ID { get; set; }
     
         public virtual Astroturfs Astroturfs { get; set; }

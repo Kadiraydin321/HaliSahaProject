@@ -1,22 +1,5 @@
-﻿@model HaliSahaProject.Models.CityViewModel
-@{
+﻿@{
     ViewBag.Title = "Halı Saha Yönetimi ve Rezervasyon Sistemi";
 }
 <h2>Halı Saha Yönetimi ve Rezervasyon Sistemine Hoşgeldiniz.</h2>
 <h6>Rezervayson yapmak ister misiniz?</h6>
-
-<form action="~/" method="post">
-    <div class="row">
-        @Html.DropDownListFor(m => m.City, (List<SelectListItem>)ViewBag.il, new { @class = "form-control col-11" })
-        @Html.ActionLink("İlerle", "Index", "Home", new { @class = "btn btn-outline-success" })
-        <input type="submit" value="Gönder" />
-    </div>
-</form>
-
-
-<div class="row">
-    @if (ViewBag.ilce!=null)
-    {
-        @Html.DropDownListFor(m => m.County, (List<SelectListItem>)ViewBag.ilce, new { @class = "form-control col-11" })
-    }
-</div>

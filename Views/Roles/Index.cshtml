@@ -1,0 +1,32 @@
+﻿@model IEnumerable<HaliSahaProject.Models.Roles>
+
+@{
+    ViewBag.Title = "Roller";
+}
+
+<h2>Roller</h2>
+
+<p>
+    @Html.ActionLink("Yeni Bir Rol Oluştur", "Create", new { }, new { @class = "btn btn-outline-success" })
+</p>
+<table class="table table-success table-hover">
+    <tr>
+        <th>
+            Rol Adı
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID },new { @class="text-warning"}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "text-danger" })
+        </td>
+    </tr>
+}
+
+</table>

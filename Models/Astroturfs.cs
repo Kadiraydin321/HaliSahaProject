@@ -11,7 +11,8 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Astroturfs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,17 @@ namespace HaliSahaProject.Models
         }
     
         public int ID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Adress { get; set; }
+        [Required]
         public string Tel { get; set; }
+        [Required]
         public string Info { get; set; }
+        [Required]
         public Nullable<int> County_ID { get; set; }
+        [Required]
         public Nullable<int> Manager_ID { get; set; }
     
         public virtual Users Users { get; set; }
