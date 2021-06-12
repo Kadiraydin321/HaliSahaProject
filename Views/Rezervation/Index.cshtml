@@ -1,0 +1,69 @@
+﻿@model IEnumerable<HaliSahaProject.Models.Rezervations>
+
+@{
+    ViewBag.Title = "Rezervasyonlar";
+}
+
+<h2>Rezervasyonlar</h2>
+
+<p>
+    @Html.ActionLink("Yeni Rezervasyon", "Create",new { },new { @class="btn btn-outline-success"})
+</p>
+<table class="table table-success table-hover">
+    <tr>
+        @if (ViewBag.user == "User" || ViewBag.user == null)
+        {
+            <th>
+                Halı Saha Adı
+            </th>
+        }
+        @if (ViewBag.user == null || ViewBag.user == "Manager")
+        {
+            <th>
+                Kullanıcı Adı
+            </th>
+        }
+        <th>
+            Tarih
+        </th>
+        <th>
+            Onay
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @if (ViewBag.user == "User" || ViewBag.user == null)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Astroturfs.Name)
+            </td>
+        }
+        @if (ViewBag.user == null || ViewBag.user == "Manager")
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.Name)
+            </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @if (item.State == true)
+            {
+                <b>Onaylandı</b>
+            }
+            else
+            {
+                <b>Onaylanmadı</b>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Sil", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>

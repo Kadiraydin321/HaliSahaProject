@@ -17,14 +17,14 @@ namespace HaliSahaProject.Controllers
             return View();
         }
 
-        // POST: AdminLogin/Create
+        // POST: AdminLogin
         [HttpPost]
         public ActionResult Index(Admin admin)
         {
             var _admin = db.Admin.Where(x => x.UserName.Equals(admin.UserName) && x.Password.Equals(admin.Password));
             if (_admin.Count() > 0)
             {
-                Session["admin"] = _admin.FirstOrDefault().UserName;
+                Session["Admin"] = _admin.FirstOrDefault().UserName;
                 return RedirectToAction("Index", "Admins");
             }
             ViewBag.GirisHatasi = "Kullanıcı adı veya şifreyi hatalı girdiniz.";
@@ -34,7 +34,7 @@ namespace HaliSahaProject.Controllers
         [HttpGet]
         public ActionResult AdminLogout()
         {
-            Session["admin"] = null;
+            Session["Admin"] = null;
             return RedirectToAction("Index", "Home");
         }
     }

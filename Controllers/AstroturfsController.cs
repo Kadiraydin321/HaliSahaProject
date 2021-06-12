@@ -43,7 +43,7 @@ namespace HaliSahaProject.Controllers
         // GET: Astroturfs/Create
         public ActionResult Create()
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -92,7 +92,7 @@ namespace HaliSahaProject.Controllers
         // GET: Astroturfs/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -145,7 +145,7 @@ namespace HaliSahaProject.Controllers
         // GET: Astroturfs/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

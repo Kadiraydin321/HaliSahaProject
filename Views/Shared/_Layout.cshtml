@@ -20,7 +20,7 @@
                     <li class="nav-item">
                         @Html.ActionLink("Ana Sayfa", "Index", "Home", new { }, new { @class = "nav-link" })
                     </li>
-                    @if (Session["admin"] == null)
+                    @if (Session["Admin"] == null)
                     {
                         <li class="nav-item">
                             @Html.ActionLink("Hakkımızda", "About", "Home", new { }, new { @class = "nav-link" })
@@ -29,7 +29,7 @@
                             @Html.ActionLink("İletişim", "Contact", "Home", new { }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Rezervasyon Yap", "Index", "Home", new { }, new { @class = "nav-link" })
+                            @Html.ActionLink("Rezervasyon Yap", "Create", "Rezervation", new { }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
                             @Html.ActionLink("Halı Sahalar", "Index", "Astroturfs", new { }, new { @class = "nav-link" })
@@ -50,37 +50,41 @@
                             @Html.ActionLink("Halı Sahalar", "Index", "Astroturfs", new { }, new { @class = "nav-link" })
                         </li>
                         <li class="nav-item">
-                            @Html.ActionLink("Rezervasyonlar", "Index", "Home", new { }, new { @class = "nav-link" })
+                            @Html.ActionLink("Rezervasyonlar", "Index", "Rezervation", new { }, new { @class = "nav-link" })
                         </li>
                     }
-
-                    @if (Session["admin"] == null)
-                    {
-                        if (Session["UserMail"] != null && Session["UserID"] != null)
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (Session["Admin"] == null)
                         {
-                            <li class="nav-item">
-                                @Html.ActionLink("Profil", "Details", "Users", new { }, new { @class = "nav-link" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Çıkış Yap", "Logout", "UserLogin", new { }, new { @class = "nav-link" })
-                            </li>
+                            if (Session["UserMail"] != null && Session["UserID"] != null)
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Rezervasyonlar", "Index", "Rezervation", new { }, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Profil", "Details", "Users", new { }, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Çıkış Yap", "Logout", "UserLogin", new { }, new { @class = "nav-link" })
+                                </li>
+                            }
+                            else
+                            {
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("Giriş Yap", "Index", "UserLogin", new { }, new { @class = "nav-link" })
+                                </li>
+                            }
                         }
                         else
                         {
-
                             <li class="nav-item">
-                                @Html.ActionLink("Giriş Yap", "Index", "UserLogin", new { }, new { @class = "nav-link" })
+                                @Html.ActionLink("Çıkış Yap", "AdminLogout", "AdminLogin", new { }, new { @class = "nav-link" })
                             </li>
                         }
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            @Html.ActionLink("Çıkış Yap", "AdminLogout", "AdminLogin", new { }, new { @class = "nav-link" })
-                        </li>
-                    }
-                </ul>
-            </div>
+                    </ul>
+</div>
         </div>
     </nav>
     <div class="container body-content">

@@ -6,7 +6,7 @@
 
 <h2>Halı Sahalar</h2>
 
-@if (Session["admin"] != null)
+@if (Session["Admin"] != null)
 {
     <p>
         @Html.ActionLink("Yeni Bir Halı Saha Oluştur", "Create", new { }, new { @class = "btn btn-outline-success" })
@@ -42,8 +42,8 @@
                     <p class="card-text">@Html.DisplayFor(modelItem => item.Adress) - @Html.DisplayFor(modelItem => item.Counties.Name)</p>
                 </div>
                 <div class="card-footer">
-                    @Html.ActionLink("Randevu Al", "Create", "", new { id = item.ID }, new { @class = "btn btn-info float-left" })
-                    @if (Session["admin"] != null)
+                    @Html.ActionLink("Rezervasyon Yap", "Create", "Rezervation", new { id = item.ID }, new { @class = "btn btn-info float-left" })
+                    @if (Session["Admin"] != null)
                     {
                         @Html.ActionLink("Düzenle", "Edit", new { id = item.ID }, new { @class = "btn btn-warning float-right" })
                         @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "btn btn-danger float-right" })

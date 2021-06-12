@@ -17,7 +17,7 @@ namespace HaliSahaProject.Controllers
         // GET: Admins
         public ActionResult Index()
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -27,7 +27,7 @@ namespace HaliSahaProject.Controllers
         // GET: Admins/Create
         public ActionResult Create()
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -54,7 +54,7 @@ namespace HaliSahaProject.Controllers
         // GET: Admins/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

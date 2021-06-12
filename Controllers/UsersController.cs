@@ -17,7 +17,7 @@ namespace HaliSahaProject.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -62,7 +62,11 @@ namespace HaliSahaProject.Controllers
                     db.Users.Add(_users);
                     db.UserLogin.Add(_UserLogin);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (Session["Admin"]!=null)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    return RedirectToAction("Index","UserLogin");
                 }
                 ViewBag.Role_ID = new SelectList(db.Roles, "ID", "Name", _users.Role_ID);
                 ViewBag.ID = new SelectList(db.UserLogin, "User_ID", "Mail", _users.ID);
@@ -157,7 +161,7 @@ namespace HaliSahaProject.Controllers
         // GET: Users/RoleEdit
         public ActionResult RoleEdit(int? id)
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -208,7 +212,7 @@ namespace HaliSahaProject.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (Session["admin"] == null)
+            if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

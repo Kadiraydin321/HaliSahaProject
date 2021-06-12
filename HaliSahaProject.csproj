@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\AstroturfsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RezervationController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -355,6 +356,10 @@
     <Content Include="Views\Astroturfs\Delete.cshtml" />
     <Content Include="Views\Astroturfs\Edit.cshtml" />
     <Content Include="Views\Astroturfs\Index.cshtml" />
+    <Content Include="Views\Rezervation\Create.cshtml" />
+    <Content Include="Views\Rezervation\Delete.cshtml" />
+    <Content Include="Views\Rezervation\Edit.cshtml" />
+    <Content Include="Views\Rezervation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
