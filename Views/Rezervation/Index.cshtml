@@ -9,20 +9,14 @@
 <p>
     @Html.ActionLink("Yeni Rezervasyon", "Create",new { },new { @class="btn btn-outline-success"})
 </p>
-<table class="table table-success table-hover">
+<table class="table table-success table-hover table-responsive-md">
     <tr>
-        @if (ViewBag.user == "User" || ViewBag.user == null)
-        {
-            <th>
-                Halı Saha Adı
-            </th>
-        }
-        @if (ViewBag.user == null || ViewBag.user == "Manager")
-        {
-            <th>
-                Kullanıcı Adı
-            </th>
-        }
+        <th>
+            Halı Saha Adı
+        </th>
+        <th>
+            Kullanıcı Adı
+        </th>
         <th>
             Tarih
         </th>
@@ -34,34 +28,32 @@
 
 @foreach (var item in Model) {
     <tr>
-        @if (ViewBag.user == "User" || ViewBag.user == null)
-        {
-            <td>
-                @Html.DisplayFor(modelItem => item.Astroturfs.Name)
-            </td>
-        }
-        @if (ViewBag.user == null || ViewBag.user == "Manager")
-        {
-            <td>
-                @Html.DisplayFor(modelItem => item.Users.Name)
-            </td>
-        }
+        <td>
+            @Html.DisplayFor(modelItem => item.Astroturfs.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.Name) 
+            @Html.DisplayFor(modelItem => item.Users.LastName)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
             @if (item.State == true)
             {
-                <b>Onaylandı</b>
+                <font>Onaylandı</font>
             }
             else
             {
-                <b>Onaylanmadı</b>
+                <font>Onaylanmadı</font>
             }
         </td>
         <td>
-            @Html.ActionLink("Düzenle", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Sil", "Delete", new { id = item.ID })
+            @if ((Session["Admin"] != null || Session["HSY"] != null) && item.State == false)
+            {
+                @Html.ActionLink("Onayla", "Edit", new { id = item.ID },new { @class="text-info"}) <font>|</font>
+            }
+            @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "text-danger" })
         </td>
     </tr>
 }

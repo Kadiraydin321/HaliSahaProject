@@ -18,7 +18,6 @@ namespace HaliSahaProject.Controllers
         public ActionResult Index()
         {
             var rezervations = db.Rezervations.Include(r => r.Astroturfs).Include(r => r.Users);
-
             if (Session["Admin"] == null)
             {
                 if (Session["UserID"] == null)
@@ -33,89 +32,70 @@ namespace HaliSahaProject.Controllers
                 }
                 else if (usrs.Role_ID == 3)
                 {
-                    ViewBag.user= "Manager";
-                    rezervations = rezervations.Where(x=>x.User_ID == usr_id);
+                    rezervations = rezervations.Where(x=>x.Astroturfs.Manager_ID == usr_id).OrderBy(x=>x.State).ThenByDescending(x=>x.Date);
                     return View(rezervations);
                 }
                 else
                 {
-                    ViewBag.user = "User";
-                    rezervations = rezervations.Where(x => x.User_ID == usr_id);
+                    rezervations = rezervations.Where(x => x.User_ID == usr_id).OrderBy(x => x.State).ThenByDescending(x => x.Date);
                     return View(rezervations);
                 }
             }
-            return View(rezervations);
+            return View(rezervations.OrderBy(x => x.State).ThenByDescending(x => x.Date));
         }
 
         // GET: Rezervation/Create
-        public ActionResult Create(int? id)
+        public ActionResult Create(int? AstroID)
         {
-            if (Session["UserID"] == null)
+            if (Session["UserID"] == null && Session["Admin"] == null)
             {
                 return RedirectToAction("Index", "UserLogin");
             }
-            if (id == null)
+            if (AstroID == null)
             {
                 ViewBag.Astroturf_ID = new SelectList(db.Astroturfs, "ID", "Name");
                 return View();
             }
-            ViewBag.Astroturf_ID = new SelectList(db.Astroturfs, "ID", "Name", id);
+            ViewBag.Astroturf_ID = new SelectList(db.Astroturfs, "ID", "Name", AstroID);
             return View();
         }
 
         // POST: Rezervation/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Date,Astroturf_ID")] Rezervations rezervations)
+        public ActionResult Create([Bind(Include = "ID,Date,Astroturf_ID,User_ID")] Rezervations rezervations)
         {
             if (ModelState.IsValid)
             {
-                if (Session["Admin"] == null)
+                if (Session["Admin"]==null)
                 {
-                    int userId = Convert.ToInt32(Session["UserID"].ToString());
-                    rezervations.User_ID = userId;
+                    db.Rezervations.Add(rezervations);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                rezervations.State = false;
-                db.Rezervations.Add(rezervations);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                else
+                {
+                    rezervations.User_ID = db.Astroturfs.Where(x=>x.ID == rezervations.Astroturf_ID).FirstOrDefault().Manager_ID;
+                    db.Rezervations.Add(rezervations);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
-            ViewBag.Astroturf_ID = new SelectList(db.Astroturfs, "ID", "Name", rezervations.Astroturf_ID);
+            ViewBag.Astroturf_ID = new SelectList(db.Astroturfs, "ID", "Name", rezervations.Astroturf_ID); 
             return View(rezervations);
         }
-
-        // GET: Rezervation/Edit/5
+        // POST: Rezervation/Edit/5
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Rezervations rezervations = db.Rezervations.Find(id);
-            if (rezervations == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Astroturf_ID = new SelectList(db.Astroturfs, "ID", "Name", rezervations.Astroturf_ID);
-            ViewBag.User_ID = new SelectList(db.Users, "ID", "Name", rezervations.User_ID);
-            return View(rezervations);
-        }
-
-        // POST: Rezervation/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Date,State,Astroturf_ID,User_ID")] Rezervations rezervations)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(rezervations).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Astroturf_ID = new SelectList(db.Astroturfs, "ID", "Name", rezervations.Astroturf_ID);
-            ViewBag.User_ID = new SelectList(db.Users, "ID", "Name", rezervations.User_ID);
-            return View(rezervations);
+            Users usr = db.Users.Find(rezervations.User_ID);
+            usr.Point += 100;
+            rezervations.State = true;
+            db.Entry(rezervations).State = EntityState.Modified;
+            db.Entry(usr).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Rezervation/Delete/5

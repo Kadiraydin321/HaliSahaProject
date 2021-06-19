@@ -25,6 +25,10 @@ namespace HaliSahaProject.Controllers
             {
                 Session["UserID"] = _User.FirstOrDefault().User_ID;
                 Session["UserMail"] = _User.FirstOrDefault().Mail;
+                if (db.Users.Where(x=>x.ID == _User.FirstOrDefault().User_ID).FirstOrDefault().Role_ID == 3)
+                {
+                    Session["HSY"] = _User.FirstOrDefault().User_ID;
+                }
                 return RedirectToAction("Index", "Home");
             }
             ViewBag.GirisHatasi = "Mail veya şifreyi hatalı girdiniz.";

@@ -11,6 +11,7 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Users
@@ -22,24 +23,36 @@ namespace HaliSahaProject.Models
             this.Rezervations = new HashSet<Rezervations>();
         }
     
+        [DisplayName("Kullanýcý ID")]
         public int ID { get; set; }
         [Required]
+        [DisplayName("Ad")]
         public string Name { get; set; }
         [Required]
+        [DisplayName("Soyad")]
         public string LastName { get; set; }
         [Required]
+        [DisplayName("Mail")]
         public string Mail { get; set; }
         [Required]
+        [DisplayName("Telefon")]
         public string Tel { get; set; }
+        [DisplayName("Kayýt Tarihi")]
         public System.DateTime RegisterDate { get; set; }
+        [DisplayName("Top Puan")]
         public int Point { get; set; }
+        [DisplayName("Rol ID")]
         public Nullable<int> Role_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DisplayName("Halý Sahalar")]
         public virtual ICollection<Astroturfs> Astroturfs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DisplayName("Rezervasyonlar")]
         public virtual ICollection<Rezervations> Rezervations { get; set; }
+        [DisplayName("Roller")]
         public virtual Roles Roles { get; set; }
+        [DisplayName("Kullanýcý Giriþ")]
         public virtual UserLogin UserLogin { get; set; }
     }
 }

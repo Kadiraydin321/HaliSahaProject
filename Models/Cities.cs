@@ -11,7 +11,8 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Cities
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,10 +21,13 @@ namespace HaliSahaProject.Models
             this.Counties = new HashSet<Counties>();
         }
     
+        [DisplayName("Ýl ID")]
         public int ID { get; set; }
+        [DisplayName("Ýl Adý")]
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DisplayName("Ýlçeler")]
         public virtual ICollection<Counties> Counties { get; set; }
     }
 }

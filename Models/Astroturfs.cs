@@ -11,7 +11,9 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Data.Entity.Infrastructure;
 
     public partial class Astroturfs
     {
@@ -20,24 +22,34 @@ namespace HaliSahaProject.Models
         {
             this.Rezervations = new HashSet<Rezervations>();
         }
-    
+
+        [DisplayName("Halý Saha ID")]
         public int ID { get; set; }
+        [DisplayName("Halý Saha Adý")]
         [Required]
         public string Name { get; set; }
+        [DisplayName("Adres")]
         [Required]
         public string Adress { get; set; }
+        [DisplayName("Telefon No")]
         [Required]
         public string Tel { get; set; }
+        [DisplayName("Bilgilendirme")]
         [Required]
         public string Info { get; set; }
+        [DisplayName("Ýlçe")]
         [Required]
         public Nullable<int> County_ID { get; set; }
+        [DisplayName("Halý Saha Yöneticisi")]
         [Required]
         public Nullable<int> Manager_ID { get; set; }
     
+        [DisplayName("Kullanýcýlar")]
         public virtual Users Users { get; set; }
+        [DisplayName("Ýlçeler")]
         public virtual Counties Counties { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DisplayName("Rezervasyonlar")]
         public virtual ICollection<Rezervations> Rezervations { get; set; }
     }
 }

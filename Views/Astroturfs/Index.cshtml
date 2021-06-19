@@ -42,7 +42,7 @@
                     <p class="card-text">@Html.DisplayFor(modelItem => item.Adress) - @Html.DisplayFor(modelItem => item.Counties.Name)</p>
                 </div>
                 <div class="card-footer">
-                    @Html.ActionLink("Rezervasyon Yap", "Create", "Rezervation", new { id = item.ID }, new { @class = "btn btn-info float-left" })
+                    @Html.ActionLink("Rezervasyon Yap", "Create", "Rezervation", new { AstroID = item.ID }, new { @class = "btn btn-info float-left" })
                     @if (Session["Admin"] != null)
                     {
                         @Html.ActionLink("Düzenle", "Edit", new { id = item.ID }, new { @class = "btn btn-warning float-right" })

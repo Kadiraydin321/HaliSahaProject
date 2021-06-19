@@ -11,20 +11,28 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Rezervations
     {
+        [DisplayName("Rezervasyon ID")]
         public int ID { get; set; }
         [Required]
+        [DisplayName("Tarih")]
         public System.DateTime Date { get; set; }
+        [DisplayName("Onay")]
         public bool State { get; set; }
         [Required]
+        [DisplayName("Halý Saha ID")]
         public Nullable<int> Astroturf_ID { get; set; }
         [Required]
+        [DisplayName("Kullanýcý ID")]
         public Nullable<int> User_ID { get; set; }
     
+        [DisplayName("Halý Sahalar")]
         public virtual Astroturfs Astroturfs { get; set; }
+        [DisplayName("Kullanýcýlar")]
         public virtual Users Users { get; set; }
     }
 }

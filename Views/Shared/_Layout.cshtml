@@ -31,9 +31,6 @@
                         <li class="nav-item">
                             @Html.ActionLink("Rezervasyon Yap", "Create", "Rezervation", new { }, new { @class = "nav-link" })
                         </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Halı Sahalar", "Index", "Astroturfs", new { }, new { @class = "nav-link" })
-                        </li>
                     }
                     else
                     {
@@ -53,50 +50,51 @@
                             @Html.ActionLink("Rezervasyonlar", "Index", "Rezervation", new { }, new { @class = "nav-link" })
                         </li>
                     }
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
-                        @if (Session["Admin"] == null)
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (Session["Admin"] == null)
+                    {
+                        if (Session["UserMail"] != null && Session["UserID"] != null)
                         {
-                            if (Session["UserMail"] != null && Session["UserID"] != null)
-                            {
-                                <li class="nav-item">
-                                    @Html.ActionLink("Rezervasyonlar", "Index", "Rezervation", new { }, new { @class = "nav-link" })
-                                </li>
-                                <li class="nav-item">
-                                    @Html.ActionLink("Profil", "Details", "Users", new { }, new { @class = "nav-link" })
-                                </li>
-                                <li class="nav-item">
-                                    @Html.ActionLink("Çıkış Yap", "Logout", "UserLogin", new { }, new { @class = "nav-link" })
-                                </li>
-                            }
-                            else
-                            {
-
-                                <li class="nav-item">
-                                    @Html.ActionLink("Giriş Yap", "Index", "UserLogin", new { }, new { @class = "nav-link" })
-                                </li>
-                            }
+                            <li class="nav-item">
+                                @Html.ActionLink("Rezervasyonlar", "Index", "Rezervation", new { }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Profil", "Details", "Users", new { }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Çıkış Yap", "Logout", "UserLogin", new { }, new { @class = "nav-link" })
+                            </li>
                         }
                         else
                         {
+
                             <li class="nav-item">
-                                @Html.ActionLink("Çıkış Yap", "AdminLogout", "AdminLogin", new { }, new { @class = "nav-link" })
+                                @Html.ActionLink("Giriş Yap", "Index", "UserLogin", new { }, new { @class = "nav-link" })
                             </li>
                         }
-                    </ul>
-</div>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Çıkış Yap", "AdminLogout", "AdminLogin", new { }, new { @class = "nav-link" })
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
-            <footer style="padding:1em;">
-                <hr />
-                <p>&copy; @DateTime.Now.Year - Kadir Aydın ASP.NET Web Projesi</p>
-            </footer>
+        <footer style="padding:1em;">
+            <hr />
+            <p>&copy; @DateTime.Now.Year - Kadir Aydın ASP.NET Web Projesi</p>
+        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
