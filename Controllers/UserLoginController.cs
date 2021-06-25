@@ -25,6 +25,7 @@ namespace HaliSahaProject.Controllers
             {
                 Session["UserID"] = _User.FirstOrDefault().User_ID;
                 Session["UserMail"] = _User.FirstOrDefault().Mail;
+                Session["Puan"] =_User.FirstOrDefault().Users.Point;
                 if (db.Users.Where(x=>x.ID == _User.FirstOrDefault().User_ID).FirstOrDefault().Role_ID == 3)
                 {
                     Session["HSY"] = _User.FirstOrDefault().User_ID;

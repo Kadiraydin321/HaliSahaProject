@@ -1,0 +1,34 @@
+﻿@model IEnumerable<HaliSahaProject.Models.Campaign>
+
+@{
+    ViewBag.Title = "Kampanyalar";
+}
+
+<h2>Kampanyalar</h2>
+@if (Session["Admin"] != null)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-success" })
+    </p>
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3" style="padding: 5px; margin-top: 1em;">
+            <div class="card bg-success text-white">
+                <div class="card-header">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </div>
+                <div class="card-body">
+                    @Html.DisplayFor(modelItem => item.Info)
+                </div>
+                @if (Session["Admin"] != null)
+                {
+                    <div class="card-footer">
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger float-right" })
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

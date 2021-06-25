@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Kadir Aydın ASP.NET Web Projesi</title>
@@ -31,6 +31,9 @@
                         <li class="nav-item">
                             @Html.ActionLink("Rezervasyon Yap", "Create", "Rezervation", new { }, new { @class = "nav-link" })
                         </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Kampanyalar", "Index", "Campaigns", new { }, new { @class = "nav-link" })
+                        </li>
                     }
                     else
                     {
@@ -49,13 +52,20 @@
                         <li class="nav-item">
                             @Html.ActionLink("Rezervasyonlar", "Index", "Rezervation", new { }, new { @class = "nav-link" })
                         </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Kampanyalar", "Index", "Campaigns", new { }, new { @class = "nav-link" })
+                        </li>
                     }
                 </ul>
                 <ul class="navbar-nav ml-auto">
+
                     @if (Session["Admin"] == null)
                     {
                         if (Session["UserMail"] != null && Session["UserID"] != null)
                         {
+                            <li class="nav-item">
+                                <font class="nav-link">Top Puan: @Session["Puan"]</font>
+                            </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Rezervasyonlar", "Index", "Rezervation", new { }, new { @class = "nav-link" })
                             </li>

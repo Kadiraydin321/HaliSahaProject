@@ -27,27 +27,29 @@
     {
         foreach (var item in Model)
         {
-            <div class="card col-md-6" style="margin-top:1em">
-                <div class="card-header">
-                    <h4 class="card-title">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </h4>
-                    <h6 class="card-subtitle">
-                        @Html.DisplayFor(modelItem => item.Users.Name) - @Html.DisplayFor(modelItem => item.Tel)
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.Info)</p>
-                    <hr />
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.Adress) - @Html.DisplayFor(modelItem => item.Counties.Name)</p>
-                </div>
-                <div class="card-footer">
-                    @Html.ActionLink("Rezervasyon Yap", "Create", "Rezervation", new { AstroID = item.ID }, new { @class = "btn btn-info float-left" })
-                    @if (Session["Admin"] != null)
-                    {
-                        @Html.ActionLink("Düzenle", "Edit", new { id = item.ID }, new { @class = "btn btn-warning float-right" })
-                        @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "btn btn-danger float-right" })
-                    }
+            <div class="col-md-6" style="padding: 5px; margin-top: 1em;">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </h4>
+                        <h6 class="card-subtitle">
+                            @Html.DisplayFor(modelItem => item.Users.Name) - @Html.DisplayFor(modelItem => item.Tel)
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Info)</p>
+                        <hr />
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Adress) - @Html.DisplayFor(modelItem => item.Counties.Name)</p>
+                    </div>
+                    <div class="card-footer">
+                        @Html.ActionLink("Rezervasyon Yap", "Create", "Rezervation", new { AstroID = item.ID }, new { @class = "btn btn-info float-left" })
+                        @if (Session["Admin"] != null)
+                        {
+                            @Html.ActionLink("Düzenle", "Edit", new { id = item.ID }, new { @class = "btn btn-warning float-right" })
+                            @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "btn btn-danger float-right" })
+                        }
+                    </div>
                 </div>
             </div>
         }

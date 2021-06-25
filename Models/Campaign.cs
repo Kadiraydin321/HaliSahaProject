@@ -11,19 +11,14 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Cities
+    using System.ComponentModel;
+
+    public partial class Campaign
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cities()
-        {
-            this.Counties = new HashSet<Counties>();
-        }
-    
         public int ID { get; set; }
+        [DisplayName("Kampanya Adý")]
         public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Counties> Counties { get; set; }
+        [DisplayName("Kampanya Bilgisi")]
+        public string Info { get; set; }
     }
 }

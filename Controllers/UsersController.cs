@@ -15,14 +15,21 @@ namespace HaliSahaProject.Controllers
         private HaliSahaDBEntities1 db = new HaliSahaDBEntities1();
 
         // GET: Users
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
             if (Session["Admin"] == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var users = db.Users.Include(u => u.Roles).Include(u => u.UserLogin);
-            return View(users.ToList());
+            users.Where(x => x.Name.Contains(search)
+                            || x.LastName.Contains(search)
+                            || x.Mail.Contains(search)
+                            || x.Roles.Name.Contains(search)
+                            || x.Tel.Contains(search)
+                            || search == null
+                            || search == "");
+            return View(users);
         }
 
         // GET: Users/Details
@@ -133,6 +140,8 @@ namespace HaliSahaProject.Controllers
             }
             return View();
         }
+
+        
 
         // POST: Users/PasswordEdit
         [HttpPost]

@@ -11,8 +11,7 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Counties
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,17 +20,12 @@ namespace HaliSahaProject.Models
             this.Astroturfs = new HashSet<Astroturfs>();
         }
     
-        [DisplayName("Ýlçe ID")]
         public int ID { get; set; }
-        [DisplayName("Ýlçe Adý")]
         public string Name { get; set; }
-        [DisplayName("Ýl ID")]
         public Nullable<int> City_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [DisplayName("Halý Sahalar")]
         public virtual ICollection<Astroturfs> Astroturfs { get; set; }
-        [DisplayName("Ýller")]
         public virtual Cities Cities { get; set; }
     }
 }

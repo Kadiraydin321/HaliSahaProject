@@ -11,9 +11,7 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Roles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,14 +20,10 @@ namespace HaliSahaProject.Models
             this.Users = new HashSet<Users>();
         }
     
-        [DisplayName("Rol ID")]
         public int ID { get; set; }
-        [Required]
-        [DisplayName("Rol Adý")]
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [DisplayName("Kullanýcýlar")]
         public virtual ICollection<Users> Users { get; set; }
     }
 }

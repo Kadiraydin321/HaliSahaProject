@@ -15,7 +15,7 @@ namespace HaliSahaProject.Controllers
         private HaliSahaDBEntities1 db = new HaliSahaDBEntities1();
 
         // GET: Rezervation
-        public ActionResult Index()
+        public ActionResult Index(String search)
         {
             var rezervations = db.Rezervations.Include(r => r.Astroturfs).Include(r => r.Users);
             if (Session["Admin"] == null)
@@ -32,16 +32,16 @@ namespace HaliSahaProject.Controllers
                 }
                 else if (usrs.Role_ID == 3)
                 {
-                    rezervations = rezervations.Where(x=>x.Astroturfs.Manager_ID == usr_id).OrderBy(x=>x.State).ThenByDescending(x=>x.Date);
+                    rezervations = rezervations.Where(x=>x.Astroturfs.Manager_ID == usr_id && (x.Astroturfs.Name.Contains(search) || x.Astroturfs.Users.Name.Contains(search) || search == null)).OrderBy(x=>x.State).ThenByDescending(x=>x.Date);
                     return View(rezervations);
                 }
                 else
                 {
-                    rezervations = rezervations.Where(x => x.User_ID == usr_id).OrderBy(x => x.State).ThenByDescending(x => x.Date);
+                    rezervations = rezervations.Where(x => x.User_ID == usr_id && (x.Astroturfs.Name.Contains(search) || x.Astroturfs.Users.Name.Contains(search) || search == null)).OrderBy(x => x.State).ThenByDescending(x => x.Date);
                     return View(rezervations);
                 }
             }
-            return View(rezervations.OrderBy(x => x.State).ThenByDescending(x => x.Date));
+            return View(rezervations.Where(x=>x.Astroturfs.Name.Contains(search) || x.Astroturfs.Users.Name.Contains(search) || search==null).OrderBy(x => x.State).ThenByDescending(x => x.Date));
         }
 
         // GET: Rezervation/Create

@@ -130,6 +130,7 @@
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\AstroturfsController.cs" />
+    <Compile Include="Controllers\CampaignsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RezervationController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -142,6 +143,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Astroturfs.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Campaign.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cities.cs">
@@ -360,6 +364,9 @@
     <Content Include="Views\Rezervation\Delete.cshtml" />
     <Content Include="Views\Rezervation\Edit.cshtml" />
     <Content Include="Views\Rezervation\Index.cshtml" />
+    <Content Include="Views\Campaigns\Create.cshtml" />
+    <Content Include="Views\Campaigns\Delete.cshtml" />
+    <Content Include="Views\Campaigns\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,8 +7,18 @@
 <h2>Rezervasyonlar</h2>
 
 <p>
-    @Html.ActionLink("Yeni Rezervasyon", "Create",new { },new { @class="btn btn-outline-success"})
+    @Html.ActionLink("Yeni Rezervasyon", "Create", new { }, new { @class = "btn btn-outline-success" })
 </p>
+@using (Html.BeginForm())
+{
+    <div class="col-sm-12 col">
+        <div class="row">
+            @Html.TextBox("search", "", new { @class = "form-control col" })
+            <input type="submit" value="Ara" class="btn btn-outline-success" />
+        </div>
+    </div>
+
+}
 <table class="table table-success table-hover table-responsive-md">
     <tr>
         <th>
@@ -26,36 +36,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Astroturfs.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users.Name) 
-            @Html.DisplayFor(modelItem => item.Users.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @if (item.State == true)
-            {
-                <font>Onaylandı</font>
-            }
-            else
-            {
-                <font>Onaylanmadı</font>
-            }
-        </td>
-        <td>
-            @if ((Session["Admin"] != null || Session["HSY"] != null) && item.State == false)
-            {
-                @Html.ActionLink("Onayla", "Edit", new { id = item.ID },new { @class="text-info"}) <font>|</font>
-            }
-            @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "text-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Astroturfs.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.Name)
+                @Html.DisplayFor(modelItem => item.Users.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @if (item.State == true)
+                {
+                    <font>Onaylandı</font>
+                }
+                else
+                {
+                    <font>Onaylanmadı</font>
+                }
+            </td>
+            <td>
+                @if ((Session["Admin"] != null || Session["HSY"] != null) && item.State == false)
+                {
+                    @Html.ActionLink("Onayla", "Edit", new { id = item.ID }, new { @class = "text-info" }) <font>|</font>
+                }
+                @Html.ActionLink("Sil", "Delete", new { id = item.ID }, new { @class = "text-danger" })
+            </td>
+        </tr>
+    }
 
 </table>

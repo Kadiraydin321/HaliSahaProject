@@ -33,5 +33,6 @@ namespace HaliSahaProject.Models
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<UserLogin> UserLogin { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Campaign> Campaign { get; set; }
     }
 }
