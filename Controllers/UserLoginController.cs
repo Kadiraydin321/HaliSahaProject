@@ -41,6 +41,8 @@ namespace HaliSahaProject.Controllers
         {
             Session["UserID"] = null;
             Session["UserMail"] = null;
+            Session["HSY"] = null;
+            Session["Puan"] = null;
             return RedirectToAction("Index","Home");
         }
     }
