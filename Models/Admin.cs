@@ -12,13 +12,16 @@ namespace HaliSahaProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Admin
     {
         public int User_ID { get; set; }
         [DisplayName("Kullanýcý Adý")]
+        [Required]
         public string UserName { get; set; }
         [DisplayName("Þifre")]
+        [Required]
         public string Password { get; set; }
     }
 }

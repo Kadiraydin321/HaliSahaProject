@@ -12,6 +12,7 @@ namespace HaliSahaProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Users
     {
@@ -24,18 +25,25 @@ namespace HaliSahaProject.Models
     
         public int ID { get; set; }
         [DisplayName("Ad")]
+        [Required]
         public string Name { get; set; }
         [DisplayName("Soyad")]
+        [Required]
         public string LastName { get; set; }
         [DisplayName("Mail")]
+        [Required]
         public string Mail { get; set; }
         [DisplayName("Telefon")]
+        [Required]
         public string Tel { get; set; }
         [DisplayName("Kayýt Tarihi")]
+        [Required]
         public System.DateTime RegisterDate { get; set; }
         [DisplayName("Puan")]
+        [Required]
         public int Point { get; set; }
         [DisplayName("Rol")]
+        [Required]
         public Nullable<int> Role_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

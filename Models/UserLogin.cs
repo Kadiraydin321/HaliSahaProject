@@ -12,12 +12,15 @@ namespace HaliSahaProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class UserLogin
     {
         public int User_ID { get; set; }
+        [Required]
         [DisplayName("Mail")]
         public string Mail { get; set; }
+        [Required]
         [DisplayName("Þifre")]
         public string Password { get; set; }
     

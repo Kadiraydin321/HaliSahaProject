@@ -12,12 +12,15 @@ namespace HaliSahaProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Rezervations
     {
         public int ID { get; set; }
+        [Required]
         [DisplayName("Tarih")]
         public Nullable<System.DateTime> Date { get; set; }
+        [Required]
         [DisplayName("Durum")]
         public Nullable<bool> State { get; set; }
         [DisplayName("Halý Saha")]

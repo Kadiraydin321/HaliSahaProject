@@ -12,6 +12,7 @@ namespace HaliSahaProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Astroturfs
     {
@@ -23,12 +24,16 @@ namespace HaliSahaProject.Models
     
         public int ID { get; set; }
         [DisplayName("Halý Saha")]
+        [Required]
         public string Name { get; set; }
         [DisplayName("Adres")]
+        [Required]
         public string Adress { get; set; }
         [DisplayName("Telefon")]
+        [Required]
         public string Tel { get; set; }
         [DisplayName("Bilgi")]
+        [Required]
         public string Info { get; set; }
         [DisplayName("Ýlçe")]
         public Nullable<int> County_ID { get; set; }

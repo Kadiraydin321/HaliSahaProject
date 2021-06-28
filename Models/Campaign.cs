@@ -12,13 +12,16 @@ namespace HaliSahaProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Campaign
     {
         public int ID { get; set; }
         [DisplayName("Kampanya Adý")]
+        [Required]
         public string Name { get; set; }
         [DisplayName("Kampanya Bilgisi")]
+        [Required]
         public string Info { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace HaliSahaProject.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Roles
     {
@@ -23,6 +24,7 @@ namespace HaliSahaProject.Models
     
         public int ID { get; set; }
         [DisplayName("Rol Adý")]
+        [Required]
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
