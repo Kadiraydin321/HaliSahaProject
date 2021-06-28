@@ -17,10 +17,8 @@ namespace HaliSahaProject.Models
     public partial class Rezervations
     {
         public int ID { get; set; }
-        [Required]
         [DisplayName("Tarih")]
         public Nullable<System.DateTime> Date { get; set; }
-        [Required]
         [DisplayName("Durum")]
         public Nullable<bool> State { get; set; }
         [DisplayName("Halý Saha")]
