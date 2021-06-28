@@ -11,7 +11,8 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,12 +23,19 @@ namespace HaliSahaProject.Models
         }
     
         public int ID { get; set; }
+        [DisplayName("Ad")]
         public string Name { get; set; }
+        [DisplayName("Soyad")]
         public string LastName { get; set; }
+        [DisplayName("Mail")]
         public string Mail { get; set; }
+        [DisplayName("Telefon")]
         public string Tel { get; set; }
+        [DisplayName("Kayýt Tarihi")]
         public System.DateTime RegisterDate { get; set; }
+        [DisplayName("Puan")]
         public int Point { get; set; }
+        [DisplayName("Rol")]
         public Nullable<int> Role_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

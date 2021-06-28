@@ -11,7 +11,8 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Counties
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +22,7 @@ namespace HaliSahaProject.Models
         }
     
         public int ID { get; set; }
+        [DisplayName("Ýlçe")]
         public string Name { get; set; }
         public Nullable<int> City_ID { get; set; }
     

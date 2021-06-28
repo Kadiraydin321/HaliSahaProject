@@ -11,11 +11,14 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Admin
     {
         public int User_ID { get; set; }
+        [DisplayName("Kullanýcý Adý")]
         public string UserName { get; set; }
+        [DisplayName("Þifre")]
         public string Password { get; set; }
     }
 }

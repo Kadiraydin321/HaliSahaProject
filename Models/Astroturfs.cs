@@ -11,7 +11,8 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Astroturfs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,17 @@ namespace HaliSahaProject.Models
         }
     
         public int ID { get; set; }
+        [DisplayName("Halý Saha")]
         public string Name { get; set; }
+        [DisplayName("Adres")]
         public string Adress { get; set; }
+        [DisplayName("Telefon")]
         public string Tel { get; set; }
+        [DisplayName("Bilgi")]
         public string Info { get; set; }
+        [DisplayName("Ýlçe")]
         public Nullable<int> County_ID { get; set; }
+        [DisplayName("Yönetici")]
         public Nullable<int> Manager_ID { get; set; }
     
         public virtual Users Users { get; set; }

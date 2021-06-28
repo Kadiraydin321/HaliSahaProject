@@ -11,11 +11,14 @@ namespace HaliSahaProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class UserLogin
     {
         public int User_ID { get; set; }
+        [DisplayName("Mail")]
         public string Mail { get; set; }
+        [DisplayName("Þifre")]
         public string Password { get; set; }
     
         public virtual Users Users { get; set; }
