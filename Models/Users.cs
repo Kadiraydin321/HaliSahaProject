@@ -37,13 +37,10 @@ namespace HaliSahaProject.Models
         [Required]
         public string Tel { get; set; }
         [DisplayName("Kayýt Tarihi")]
-        [Required]
         public System.DateTime RegisterDate { get; set; }
         [DisplayName("Puan")]
-        [Required]
         public int Point { get; set; }
         [DisplayName("Rol")]
-        [Required]
         public Nullable<int> Role_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

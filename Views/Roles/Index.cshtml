@@ -23,8 +23,8 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID },new { @class="text-warning"}) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "text-danger" })
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.ID },new { @class="text-warning"}) |
+            @Html.ActionLink("Sil", "Delete", new { id=item.ID }, new { @class = "text-danger" })
         </td>
     </tr>
 }
